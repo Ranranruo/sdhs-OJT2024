@@ -11,7 +11,7 @@ public class ToastApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ToastApplication.class, args);
-		Parent parent = new Parent("신민석");
+//		Parent parent = new Parent("신민석");
 	}
 
 	class Human {
