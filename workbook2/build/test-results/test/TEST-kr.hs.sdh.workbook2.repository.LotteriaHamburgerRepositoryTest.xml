@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="kr.hs.sdh.workbook2.repository.LotteriaHamburgerRepositoryTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-10-30T06:35:36" hostname="309-003" time="0.01">
+  <properties/>
+  <testcase name="saveHamburger2()" classname="kr.hs.sdh.workbook2.repository.LotteriaHamburgerRepositoryTest" time="0.01"/>
+  <system-out><![CDATA[[kr.hs.sdh.workbook2.entity.Hamburger@52e7a6b2]
+kr.hs.sdh.workbook2.entity.Hamburger@421e361
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
