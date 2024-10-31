@@ -1,5 +1,12 @@
 [
   {
+  "name": "통새우크런KIM버거",
+  "price": 7700,
+  "imagePath": "/images/통새우크런KIM버거.png",
+  "isNew": false,
+  "isRecommended": false
+  },
+  {
     "name": "통새우크런KIM버거",
     "price": 7700,
     "imagePath": "/images/통새우크런KIM버거.png",

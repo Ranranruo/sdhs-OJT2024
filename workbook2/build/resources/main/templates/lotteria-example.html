@@ -21,6 +21,9 @@
                 <span>전체메뉴</span>
                 <input hidden="hidden" name="tab-content" type="radio" />
             </label>
+            <label>
+                <input id="hamburger-list" class="search-field" type="text">
+            </label>
         </section>
         <section class="inner-box list-box">
             <div class="hamburger-box">
@@ -30,5 +33,62 @@
             </div>
         </section>
     </article>
+    <script>
+        // window.addEventListener("DOMContentLoaded", async () => {
+        //     const searchInput = document.getElementById('search-input');
+        // })
+
+
+        window.addEventListener("DOMContentLoaded", async () => {
+            const $hamburgerList = document.querySelector(".list-box");
+            // 1번
+            const setMenus = async (searchKeyword = "") => {
+                // searchKeyword = searchKeyword.match(/[!@#$%^&*]/, "") ?? "";
+                if(searchKeyword != "") {
+                    searchKeyword = [...searchKeyword].reduce((acc, char) => {
+                        if (char.match(/[!@#$%^&*~?]/)) {
+                            return acc + "\\" + char;
+                        }
+                        return acc + char;
+                    }, '')
+                }
+                searchKeyword = searchKeyword.trim();
+                const hamburgers = await fetch("lotteria-menus?hamburgerName=" + encodeURIComponent(searchKeyword)).then(data => data.json());
+                $hamburgerList.innerHTML = hamburgers.reduce((acc, hamburger)=>{
+                    return acc + `
+                <div class="hamburger-box">
+                    <img class="hamburger-image" alt="${hamburger.name}" src="${hamburger.imagePath}" />
+                    <p class="hamburger-data hamburger-name">${hamburger.name}</p>
+                    <p class="hamburger-data hamburger-price">${hamburger.price.toLocaleString() + '원'}</p>
+                </div>`;
+                }, '');
+
+            }
+
+            setMenus();
+
+            // 2번
+            // const hamburgers = await (await fetch("lotteria-menus")).json();
+
+
+            document.querySelector("input#hamburger-list").addEventListener("keyup", async (e)=>{
+                const code = e.code;
+                if(code === "Enter") {
+                    await setMenus(e.target.value);
+                    e.target.value = "";
+                }
+            })
+
+            // let hamburgersHTML = '';
+            // hamburgers.forEach(hamburger => {
+            //     hamburgersHTML = hamburgersHTML + `
+            //     <div class="hamburger-box">
+            //         <img class="hamburger-image" alt="${hamburger.name}" src="${hamburger.imagePath}" />
+            //         <p class="hamburger-data hamburger-name">${hamburger.name}</p>
+            //         <p class="hamburger-data hamburger-price">${hamburger.price.toLocaleString() + '원'}</p>
+            //     </div>`;
+            // })
+        });
+    </script>
 </body>
 </html>

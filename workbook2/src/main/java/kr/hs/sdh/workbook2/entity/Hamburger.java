@@ -1,5 +1,6 @@
 package kr.hs.sdh.workbook2.entity;
 
+import java.beans.ConstructorProperties;
 import java.text.DecimalFormat;
 import java.util.Objects;
 
@@ -10,6 +11,13 @@ public class Hamburger {
     public boolean isNew;
     public boolean isRecommended;
 
+    @ConstructorProperties({
+            "name",
+            "price",
+            "imagePath",
+            "isNew",
+            "isRecommended"
+    })
     public Hamburger(String name, int price, String imagePath, boolean isNew, boolean isRecommended) {
         this.name = name;
         this.price = price;

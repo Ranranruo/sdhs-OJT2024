@@ -83,3 +83,11 @@ body {
         font-weight: 600;
     }
 }
+.search-field {
+    border: none;
+    background-color: transparent;
+    &:focus {
+        outline: none;
+        border-bottom: 0.0625rem solid #666;
+    }
+}

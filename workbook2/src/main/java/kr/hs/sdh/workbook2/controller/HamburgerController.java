@@ -1,6 +1,6 @@
 package kr.hs.sdh.workbook2.controller;
 
-import kr.hs.sdh.workbook2.entity.Hamburger;
+import  kr.hs.sdh.workbook2.entity.Hamburger;
 import kr.hs.sdh.workbook2.service.HamburgerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
