@@ -2,16 +2,16 @@ package kr.hs.sdh.workbook2.entity;
 
 import java.beans.ConstructorProperties;
 import java.text.DecimalFormat;
-import java.util.Objects;
 
 public class Hamburger {
+
     private String name;
     private int price;
     private String imagePath;
     public boolean isNew;
     public boolean isRecommended;
 
-    @ConstructorProperties({
+    @ConstructorProperties(value = {
             "name",
             "price",
             "imagePath",
@@ -69,6 +69,7 @@ public class Hamburger {
     public String getPriceByFormat(){
         return new DecimalFormat("##,###").format(this.price);
     }
+
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Hamburger hamburger) {

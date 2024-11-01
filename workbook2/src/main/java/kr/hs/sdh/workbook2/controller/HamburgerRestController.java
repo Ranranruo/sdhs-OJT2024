@@ -1,11 +1,16 @@
 package kr.hs.sdh.workbook2.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import kr.hs.sdh.workbook2.entity.Hamburger;
 import kr.hs.sdh.workbook2.service.HamburgerService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.view.RedirectView;
 
+import java.io.IOException;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,7 +28,6 @@ public class HamburgerRestController {
         List<Hamburger> hamburgers = this.hamburgerService.getHamburgers();
 //         defaultValue로 if 문을 없애도 됨
 //        if(hamburgerName == null || hamburgerName.isEmpty()) return hamburgers;
-        System.out.println(hamburgerName);
         return hamburgers
                 .stream()
                 .filter(hamburger -> hamburger.getName().matches(".*" + hamburgerName + ".*"))
@@ -36,5 +40,20 @@ public class HamburgerRestController {
 //            }
 //        }
 //        return filteredHamburgers;
+    }
+
+    @PostMapping("/lotteria-add-menu")
+    private void lotterialMenus(
+            Hamburger hamburger,
+            @RequestParam(value = "image") MultipartFile multipartFile,
+            HttpServletResponse httpServletResponse
+    ) throws IOException {
+        if (hamburger != null) {
+            System.out.println(hamburger.isRecommended);
+            System.out.println(hamburger.isNew);
+            hamburgerService.setHamburger(hamburger, multipartFile);
+            httpServletResponse.sendRedirect("lotteria-example");
+        }
+//        return new RedirectView("/lotteria-example");
     }
 }

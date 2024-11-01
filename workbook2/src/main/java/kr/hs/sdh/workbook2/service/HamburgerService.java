@@ -4,12 +4,17 @@ import kr.hs.sdh.workbook2.entity.Hamburger;
 import kr.hs.sdh.workbook2.repository.HamburgerRepository;
 import kr.hs.sdh.workbook2.repository.LotteriaHamburgerRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
 
 @Service
 public final class HamburgerService {
+
+    private static final String ABSOLUTE_PATH = "C:\\Users\\309\\Desktop\\OJT2024\\workbook2\\src\\main\\resources\\static\\images\\";
 
     // 햄버거 데이터 저장소
     private final HamburgerRepository hamburgerRepository;
@@ -37,4 +42,19 @@ public final class HamburgerService {
             .toList();
     }
 
+    public void setHamburger(Hamburger hamburger, final MultipartFile multipartFile) {
+        final String fileName = multipartFile.getOriginalFilename();
+
+        if(fileName != null && !fileName.isEmpty()) {
+            try{
+                final File file = new File(ABSOLUTE_PATH + fileName);
+
+                multipartFile.transferTo(file);
+                hamburger.setImagePath("/images/" + fileName);
+                this.hamburgerRepository.saveHamburger(hamburger);
+            } catch (final IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
 }
